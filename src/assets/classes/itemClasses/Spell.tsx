@@ -1,56 +1,96 @@
-import {Item} from './Item';
+import { Item } from "./Item";
 
-export class Spell extends  Item {
-    private description: string;
-    private range: string;
-    private damageType: string;
-    private spellSlots: string;
+export class Spell extends Item {
+  private description: string;
+  private range: string;
+  private damageType: string;
+  private spellSlots: string;
+  private level: string;
+  private school: string;
+  private duration: string;
 
-    constructor(name: string, ItemPrice: number, ItemQuantity: number, description: string, range: string, damageType: string, spellSlots: string ) {
-        super(name, ItemPrice, ItemQuantity);
-        this.description = description;
-        this.range = range;
-        this.damageType = damageType;
-        this.spellSlots = spellSlots;
-    }
+  constructor(
+    name: string,
+    ItemPrice: number,
+    ItemQuantity: number,
+    description: string,
+    range: string,
+    damageType: string,
+    spellSlots: string,
+    level: string,
+    school: string,
+    duration: string
+  ) {
+    super(name, ItemPrice, ItemQuantity);
+    this.description = description;
+    this.range = range;
+    this.damageType = damageType;
+    this.spellSlots = spellSlots;
+    this.level = level;
+    this.school = school;
+    this.duration = duration;
+  }
 
+  //!Description Methods
+  public setDescription(newDesc: string) {
+    this.description = newDesc;
+  }
 
-    //!Description Methods
-    public setDescription(newDesc: string) {
-        this.description = newDesc;
-    }
+  public getDescription(): string {
+    return this.description;
+  }
 
-    public getDescription(): string {
-        return this.description;
-    }
+  //!Range Methods
+  public setRange(newRange: string) {
+    this.range = newRange;
+  }
 
+  public getRange(): string {
+    return this.range;
+  }
 
-    //! Range Methods
-    public setRange(newRange: string) {
-        this.range = newRange;
-    }
+  //!Damage Type Methods
+  public setDType(newType: string) {
+    this.damageType = newType;
+  }
 
-    public getRange(): string {
-        return this.range;
-    }
+  public getDType(): string {
+    return this.damageType;
+  }
 
+  //!Spell Slot Methods
+  public setSpellSlots(newSlots: string) {
+    this.spellSlots = newSlots;
+  }
 
-    //!Damage Type Methods
-    public setDType(newType: string) {
-        this.damageType = newType;
-    }
+  public getSpellSlots(): string {
+    return this.spellSlots;
+  }
 
-    public getDType(): string {
-        return this.damageType;
-    }
-    
+  //!Level Methods
+  public setLevel(newLevel: string) {
+    this.level = newLevel;
+  }
 
-    //!Spell Slot Methods
-    public setSpellSlots(newSlots: string) {
-        this.spellSlots = newSlots;
-    }
+  public getLevel(): string {
+    return this.level;
+  }
 
-    public getSpellSlots(): string {
-        return this.spellSlots;
-    }
+  //!School Methods
+  public setSchool(newSchool: string) {
+    this.school = newSchool;
+  }
+
+  public getSchool(): string {
+    return this.school;
+  }
+
+  //!Duration Methods
+  public setDuration(newDuration: string) {
+    this.duration = newDuration;
+  }
+
+  public getDuration(): string {
+    return this.duration;
+  }
 }
