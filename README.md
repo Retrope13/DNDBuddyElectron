@@ -1,30 +1,15 @@
-# React + TypeScript + Vite
+The purpose of this software is to create a system that is reminiscient of a video game HUD/character information screen. I've noticed that when newer players of the Dungeons and Dragons table top role playing game are first introduced to the mechanics it can often be overwhelming and confusing. A straight forward and familiar system will be very helpful for new players.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Running the software:
 
-Currently, two official plugins are available:
+## Packaging for production:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### `npm run build`
 
-## Expanding the ESLint configuration
+### will compile the TS application into JS. Then it will bundle all of the application assets (CSS, HTML, JS, TS) and create a production build which will be standalone.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Running for development:
 
-- Configure the top-level `parserOptions` property like this:
+### `npm run dev`
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Will concurrently run the `vite` command which runs a development server locally. This supports the hot-reloading as well as several other useful tools for developing. The other command that it runs is `electron .` which runs the electron application that exists in the specified main directory.
