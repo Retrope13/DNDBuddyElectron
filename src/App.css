@@ -1,3 +1,7 @@
+body {
+  background-color: #121212;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -33,16 +37,31 @@
   }
 }
 
-.inv_Weapons {
+/* ^Custom elements */
+.inv {
   padding: 2em;
-  background-color: white;
+  background-color: #1D1D1D;
   border-radius: 10px;
-  max-height: 700px;
+  max-height: 500px;
   min-height: 500px;
-  max-width: 700px;
+  max-width: fit-content;
   min-width: 300px;
-  overflow: auto;
+  overflow-y: auto;
 }
+
+#button {
+  background-color: #BB86FC;
+  color: #121212;
+  max-width: fit-content;
+}
+
+.tabPanel {
+  overflow-y: auto;
+  max-width: 360px;
+  border-radius: 10px;
+}
+
+/* Look into making the scrollbar rounded and a different color */
 
 .read-the-docs {
   color: #888;
