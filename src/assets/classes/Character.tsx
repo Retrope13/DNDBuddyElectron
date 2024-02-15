@@ -1,14 +1,27 @@
+import { Armor } from "./itemClasses/Armor";
+import { Spell } from "./itemClasses/Spell";
+import { Weapon } from "./itemClasses/Weapon";
+import { Stat } from "./Stat";
+
 export class Character {
   // Properties
   private name: string;
   private level: number;
   private hp: number;
+  private weapons: Weapon[] = [];
+  private spells: Spell[] = [];
+  private stats: Stat[] = [];
+  private armors: Armor[] = [];
 
   // Constructor
-  constructor(CharName: string, CharLevel: number, CharHp: number) {
+  constructor(CharName: string, CharLevel: number, CharHp: number, weapons: Weapon[], spells: Spell[], stats: Stat[], armors: Armor[]) {
     this.name = CharName;
     this.level = CharLevel;
     this.hp = CharHp;
+    this.weapons = weapons;
+    this.spells = spells;
+    this.stats = stats;
+    this.armors = armors;
   }
 
   //!Name Methods
