@@ -188,19 +188,20 @@ function findTable(TABLE_NAME) {
 
 //&AllArmor functions if the table exists don't reinsert the data, if it doesn't exist make it
 function insertAllArmor() {
-    if (findTable("lightArmor") !== 1) {
+    const tableNames = ["lightArmor", "mediumArmor", "heavyArmor", "shields"];
+    if (findTable(tableNames[0]) !== 1) {
         insertLightArmor();
     }
 
-    if (findTable("mediumArmor") !== 1) {
+    if (findTable(tableNames[1]) !== 1) {
         insertMediumArmor();
     }
 
-    if (findTable("heavyArmor") !== 1) {
+    if (findTable(tableNames[2]) !== 1) {
         insertHeavyArmor();
     }
 
-    if (findTable("shields") !== 1) {
+    if (findTable(tableNames[3]) !== 1) {
         insertShield();
     }
 }
