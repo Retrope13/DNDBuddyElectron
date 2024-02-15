@@ -1,10 +1,15 @@
 const { app, BrowserWindow, screen } = require("electron");
 const path = require("path");
+require("../src/assets/Databases/Armor.cjs");
+require("../src/assets/Databases/Weapons.cjs");
+require("../src/assets/Databases/Spells.cjs");
+
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
   app.quit();
 }
+
 
 const createWindow = () => {
   // Create the browser window.
@@ -19,6 +24,8 @@ const createWindow = () => {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+
+
 };
 
 // This method will be called when Electron has finished
