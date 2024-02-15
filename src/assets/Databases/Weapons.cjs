@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var sqlite3 = require("sqlite3");
 
-var db = new sqlite3.Database("./Weapons.db");
+var db = new sqlite3.Database("./ActiveDBs/Weapons.db");
 // Function to create a table and insert simple melee weapon data into it
 function insertSimpleMeleeWeapons() {
   // Create table
@@ -38,7 +38,7 @@ function insertSimpleRangedWeapons() {
     );
     // Insert some data
     var stmt = db.prepare(
-      "INSERT INTO simpleMeleeWeapons (name, price, numDice, typeDice, typeDamage, type, range) VALUES (?, ?, ?, ?, ?, ?, ?)"
+      "INSERT INTO simpleRangedWeapons (name, price, numDice, typeDice, typeDamage, type, range) VALUES (?, ?, ?, ?, ?, ?, ?)"
     );
     stmt.run("Crossbow, light", 25, 1, 8, "Piercing", "Loading, two-handed", "5ft");
     stmt.run("Dart", 1, 1, 4, "piercing", "Finesse, thrown", "20/60ft");
@@ -57,7 +57,7 @@ function insertMartialMeleeWeapons() {
     );
     // Insert some data
     var stmt = db.prepare(
-      "INSERT INTO simpleMeleeWeapons (name, price, numDice, typeDice, typeDamage, type, range) VALUES (?, ?, ?, ?, ?, ?, ?)"
+      "INSERT INTO martialMeleeWeapons (name, price, numDice, typeDice, typeDamage, type, range) VALUES (?, ?, ?, ?, ?, ?, ?)"
     );
     stmt.run("Battleaxe", 10, 1, 8, "Slashing", "Versatile (1d10)", "5ft");
     stmt.run("Flail", 10, 1, 8, "Bludgeoning", "-", "5ft");
@@ -91,7 +91,7 @@ function insertMartialRangedWeapons() {
     );
     // Insert some data
     var stmt = db.prepare(
-      "INSERT INTO simpleMeleeWeapons (name, price, numDice, typeDice, typeDamage, type, range) VALUES (?, ?, ?, ?, ?, ?, ?)"
+      "INSERT INTO martialRangedWeapons (name, price, numDice, typeDice, typeDamage, type, range) VALUES (?, ?, ?, ?, ?, ?, ?)"
     );
     stmt.run("Blowgun", 10, 1, 1, "Piercing", "Loading", "25/100ft");
     stmt.run("Crossbow, hand", 75, 1, 6, "piercing", "light, loading", "30/120ft");
@@ -155,20 +155,63 @@ function selectMartialRangedWeaponsData() {
   db.close();
 }
 
+function findTable(TABLE_NAME) {
+  const DB_PATH = "../../../ActiveDBs/Weapons.db";
+     
+  // Open the SQLite database
+  const db = new sqlite3.Database(DB_PATH, (err) => {
+      if (err) {
+          console.error('Error opening database:', err.message);
+          return;
+      }
+      console.log('Database opened successfully');
+  
+      // Query to check if the table exists
+      const query = `SELECT name FROM sqlite_master WHERE type='table' AND name=?`;
+      
+      // Execute the query with the table name as a parameter
+      db.get(query, [TABLE_NAME], (err, row) => {
+          if (err) {
+              console.error('Error querying table:', err.message);
+              return;
+          }
+          if (row) {
+              // The table exists
+              return 1;
+          } else {
+              // The table does not exist
+              return 0;
+          }
+      });
+
+  });
+  return -1;
+
+
+}
 
 //Function to insert all data
 function insertAllWeaponData() {
+  const tableNames = ["simpleMeleeWeapons", "simpleRangedWeapons", "martialMeleeWeapons", "martialRangedWeapons"];
   // Insert simple melee weapon data into the table
-  insertSimpleMeleeWeapons();
+  if (findTable(tableNames[0]) !== 1) {
+    insertSimpleMeleeWeapons();
+  }
 
   //insert simple ranged weapon data into the table
-  insertSimpleRangedWeapons();
+  if (findTable(tableNames[1]) !== 1) {
+    insertSimpleRangedWeapons();
+  }
 
   //insert martial melee weapon data into the table
-  insertMartialMeleeWeapons();
+  if (findTable(tableNames[2]) !== 1) {
+    insertMartialMeleeWeapons();
+  }
 
   //insert martial ranged weapon data into the table
-  insertMartialRangedWeapons();
+  if (findTable(tableNames[3]) !== 1) {
+    insertMartialRangedWeapons();
+  }
 }
 
 // Select and display the inserted data
@@ -181,4 +224,3 @@ function selectAllWeaponData() {
 
 
 insertAllWeaponData();
-selectAllWeaponData();

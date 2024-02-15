@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var sqlite3 = require("sqlite3");
 
-var db = new sqlite3.Database("./Spells.db");
+var db = new sqlite3.Database("./ActiveDBs/Spells.db");
 
 
 //^Insert functions
@@ -751,7 +751,7 @@ function insertNinthLevels() {
     ["Weird", "Illusion", "1 Action", "120 feet", "Concentration, up to 1 minute", "V, S"],
     ["Wish", "Conjuration", "1 Action", "Self", "Instantaneous", "V"]
   ];
-
+  
   const insertStmt = db.prepare('INSERT INTO ninthLevels (name, school, castingTime, range, duration, components) VALUES (?, ?, ?, ?, ?, ?)');
   ninthLevels.forEach(spell => {
     insertStmt.run(spell);
@@ -759,6 +759,45 @@ function insertNinthLevels() {
   insertStmt.finalize();
 });
 }
+
+
+
+//*Find table function... very important
+function findTable(TABLE_NAME) {
+  const DB_PATH = "../../../ActiveDBs/Spells.db";
+     
+  // Open the SQLite database
+  const db = new sqlite3.Database(DB_PATH, (err) => {
+      if (err) {
+          console.error('Error opening database:', err.message);
+          return;
+      }
+      console.log('Database opened successfully');
+  
+      // Query to check if the table exists
+      const query = `SELECT name FROM sqlite_master WHERE type='table' AND name=?`;
+      
+      // Execute the query with the table name as a parameter
+      db.get(query, [TABLE_NAME], (err, row) => {
+          if (err) {
+              console.error('Error querying table:', err.message);
+              return;
+          }
+          if (row) {
+              // The table exists
+              return 1;
+          } else {
+              // The table does not exist
+              return 0;
+          }
+      });
+
+  });
+  return -1;
+
+
+}
+
 
 
 //!Select functions
@@ -864,21 +903,52 @@ function selectNinthLevels() {
 }
 
 
-//&AllSpells functions
+//&AllSpells functions see if the table exists. If it does then don't recreate the tables
 function insertAllSpells() {
-  insertCantrips();
-  insertFirstLevels();
-  insertSecondLevels();
-  insertThirdLevels();
-  insertFourthLevels();
+  const tableNames = ["cantrips", "firstLevels", "secondLevels", "thirdLevels", "fourthLevels", "fifthLevels", "sixthLevels", "seventhLevels", "eigthLevels", "ninthLevels"];
+  if (findTable(tableNames[0]) !== 1) {
+    insertCantrips();
+  }
+
+  if (findTable(tableNames[1]) !== 1) {
+    insertFirstLevels();
+
+  }
+  
+  if (findTable(tableNames[2]) !== 1) {
+    insertSecondLevels();
+  }
+
+  if (findTable(tableNames[3]) !== 1) {
+    insertThirdLevels();
+  }
+
+  if (findTable(tableNames[4]) !== 1) {
+    insertFourthLevels();
+  }
+
+  if (findTable(tableNames[5]) !== 1) {
   insertFifthLevels();
-  insertSixthLevels();
-  insertSeventhLevels();
-  insertEigthLevels();
-  insertNinthLevels();
+  }
+
+  if (findTable(tableNames[6]) !== 1) {
+    insertSixthLevels();
+  }
+
+  if (findTable(tableNames[7]) !== 1) {
+    insertSeventhLevels();
+  }
+
+  if (findTable(tableNames[8]) !== 1) {
+    insertEigthLevels();
+  }
+
+  if (findTable(tableNames[9]) !== 1) {
+    insertNinthLevels();
+  }
 }
 
-
+//^I can add the table check later...
 function selectAllSpells() {
   selectCantrips();
   selectFirstLevels();
@@ -893,4 +963,3 @@ function selectAllSpells() {
 }
 
 insertAllSpells();
-selectAllSpells();
