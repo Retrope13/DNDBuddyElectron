@@ -2,9 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var sqlite3 = require("sqlite3");
 
+var db = new sqlite3.Database("./Weapons.db");
 // Function to create a table and insert simple melee weapon data into it
 function insertSimpleMeleeWeapons() {
-  var db = new sqlite3.Database("Weapons.db");
   // Create table
   db.serialize(function () {
     db.run(
@@ -12,7 +12,7 @@ function insertSimpleMeleeWeapons() {
     );
     // Insert some data
     var stmt = db.prepare(
-      "INSERT INTO simpleMeleeWeapons (name, price, numDice, typeDice, type) VALUES (?, ?)"
+      "INSERT INTO simpleMeleeWeapons (name, price, numDice, typeDice, typeDamage, type, range) VALUES (?, ?, ?, ?, ?, ?, ?)"
     );
     stmt.run("Club", 1, 1, 4, "Bludgeoning", "light, '5ft'");
     stmt.run("Dagger", 2, 1, 4, "piercing", "Finesse, light, thrown", "20/60ft"
@@ -27,7 +27,6 @@ function insertSimpleMeleeWeapons() {
 
     stmt.finalize();
   });
-  db.close();
 }
 
 // Function to create a table and insert simple ranged weapon data into it
@@ -39,7 +38,7 @@ function insertSimpleRangedWeapons() {
     );
     // Insert some data
     var stmt = db.prepare(
-      "INSERT INTO simpleRangedWeapons (name, price, numDice, typeDice, type) VALUES (?, ?)"
+      "INSERT INTO simpleMeleeWeapons (name, price, numDice, typeDice, typeDamage, type, range) VALUES (?, ?, ?, ?, ?, ?, ?)"
     );
     stmt.run("Crossbow, light", 25, 1, 8, "Piercing", "Loading, two-handed", "5ft");
     stmt.run("Dart", 1, 1, 4, "piercing", "Finesse, thrown", "20/60ft");
@@ -47,7 +46,6 @@ function insertSimpleRangedWeapons() {
     stmt.run("Sling", 1, 1, 4, "bludgeoning", "-", "30/120ft");
     stmt.finalize();
   });
-  db.close();
 }
 
 // Function to create a table and insert martial melee weapon data into it
@@ -59,7 +57,7 @@ function insertMartialMeleeWeapons() {
     );
     // Insert some data
     var stmt = db.prepare(
-      "INSERT INTO martialMeleeWeapons (name, price, numDice, typeDice, type) VALUES (?, ?)"
+      "INSERT INTO simpleMeleeWeapons (name, price, numDice, typeDice, typeDamage, type, range) VALUES (?, ?, ?, ?, ?, ?, ?)"
     );
     stmt.run("Battleaxe", 10, 1, 8, "Slashing", "Versatile (1d10)", "5ft");
     stmt.run("Flail", 10, 1, 8, "Bludgeoning", "-", "5ft");
@@ -82,7 +80,6 @@ function insertMartialMeleeWeapons() {
 
     stmt.finalize();
   });
-  db.close();
 }
 
 // Function to create a table and insert martial ranged weapon data into it
@@ -94,7 +91,7 @@ function insertMartialRangedWeapons() {
     );
     // Insert some data
     var stmt = db.prepare(
-      "INSERT INTO martialRangedWeapons (name, price, numDice, typeDice, type) VALUES (?, ?)"
+      "INSERT INTO simpleMeleeWeapons (name, price, numDice, typeDice, typeDamage, type, range) VALUES (?, ?, ?, ?, ?, ?, ?)"
     );
     stmt.run("Blowgun", 10, 1, 1, "Piercing", "Loading", "25/100ft");
     stmt.run("Crossbow, hand", 75, 1, 6, "piercing", "light, loading", "30/120ft");
@@ -103,7 +100,6 @@ function insertMartialRangedWeapons() {
     stmt.run("Net", 1, 0, 0, "None", "Special, thrown", "5/15ft");
     stmt.finalize();
   });
-  db.close();
 }
 // Function to select and display data from the table
 function selectSimpleMeleeWeaponsData() {
@@ -117,7 +113,6 @@ function selectSimpleMeleeWeaponsData() {
       }
     });
   });
-  db.close();
 }
 
 function selectSimpleRangedWeaponsData() {
@@ -131,7 +126,6 @@ function selectSimpleRangedWeaponsData() {
       }
     });
   });
-  db.close();
 }
 
 function selectMartialMeleeWeaponsData() {
@@ -145,7 +139,6 @@ function selectMartialMeleeWeaponsData() {
       }
     });
   });
-  db.close();
 }
 
 function selectMartialRangedWeaponsData() {
