@@ -764,7 +764,7 @@ function insertNinthLevels() {
 
 //*Find table function... very important
 function findTable(TABLE_NAME) {
-  const DB_PATH = "../../../ActiveDBs/Spells.db";
+  const DB_PATH = "./ActiveDBs/Spells.db";
      
   // Open the SQLite database
   const db = new sqlite3.Database(DB_PATH, (err) => {

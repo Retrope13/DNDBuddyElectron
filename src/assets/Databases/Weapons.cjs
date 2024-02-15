@@ -156,7 +156,7 @@ function selectMartialRangedWeaponsData() {
 }
 
 function findTable(TABLE_NAME) {
-  const DB_PATH = "../../../ActiveDBs/Weapons.db";
+  const DB_PATH = "./ActiveDBs/Weapons.db";
      
   // Open the SQLite database
   const db = new sqlite3.Database(DB_PATH, (err) => {

@@ -150,7 +150,7 @@ function selectShield() {
 
 //!!Find table function... really important
 function findTable(TABLE_NAME) {
-    const DB_PATH = "../../../ActiveDBs/Armor.db";
+    const DB_PATH = "./ActiveDBs/Armor.db";
        
     // Open the SQLite database
     const db = new sqlite3.Database(DB_PATH, (err) => {
