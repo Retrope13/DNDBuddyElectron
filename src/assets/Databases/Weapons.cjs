@@ -185,3 +185,7 @@ function selectAllWeaponData() {
   selectMartialMeleeWeaponsData();
   selectMartialRangedWeaponsData();
 }
+
+
+insertAllWeaponData();
+selectAllWeaponData();
